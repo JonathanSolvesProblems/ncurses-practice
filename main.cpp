@@ -2,31 +2,24 @@
 using namespace std;
 
 int main(int argc, char ** argv) {
-    // initializes screen
-    // sets up memory and clears the screen
+    
     initscr();
 
-    int x, y;
-    x = y = 10;
+    int height, width, start_y, start_x;
+    height = 10;
+    width = 20;
+    start_y = start_x = 10;
 
-    // moves the cursor to the specified location.
-    move(y, x);
+    WINDOW * win = newwin(height, width, start_x, start_y);
+    refresh();
 
-    // prints a string(const char *) to a window.
-    printw("classic hello world.");
+    box(win, 0, 0);
+    mvwprintw(win, 1, 1, "this is my window"); // output to window
+    wrefresh(win); // only refreshes window.
 
-    // see what is happening, returns int value of that key.
     int c = getch();
 
-    clear();
-
-    mvprintw(0, 0, "%d", c); // same as move(0, 0) before.
-
-    
-
-    getch();
-
-    endwin(); // deallocates memory and ends ncurses.
+    endwin();
 
 
     return 0;
