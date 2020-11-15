@@ -6,15 +6,23 @@ int main(int argc, char ** argv) {
     // sets up memory and clears the screen
     initscr();
 
+    int x, y;
+    x = y = 10;
+
+    // moves the cursor to the specified location.
+    move(y, x);
+
     // prints a string(const char *) to a window.
     printw("classic hello world.");
 
-    // refreshes screen to match what's in memory.
-    refresh();
-
     // see what is happening, returns int value of that key.
     int c = getch();
-    printw("%d", c);
+
+    clear();
+
+    mvprintw(0, 0, "%d", c); // same as move(0, 0) before.
+
+    
 
     getch();
 
