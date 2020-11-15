@@ -9,6 +9,24 @@ int main(int argc, char ** argv) {
     // raw(); // doesn't accept special character. Shows us control-c in top left corner.
     noecho(); // whatever input user types does not show on screen.
 
+    if(!has_colors()) {
+        printw("Terminal does not support colour.");
+        getch();
+        return 1;
+    }
+
+    start_color();
+
+    init_pair(1, COLOR_CYAN, COLOR_WHITE);
+    init_pair(2, COLOR_YELLOW, COLOR_MAGENTA);
+
+    if(can_change_color()) {
+        // printw("can change colour");
+        init_color(COLOR_CYAN, 0-999, 0-999, 0-999);
+    }
+
+    
+
     int height, width, start_y, start_x;
     height = 10;
     width = 20;
@@ -16,6 +34,12 @@ int main(int argc, char ** argv) {
 
     WINDOW * win = newwin(height, width, start_x, start_y);
     refresh();
+
+   // start_curses(true, true);
+
+   attron(COLOR_PAIR(2));
+   printw("testing...");
+   attroff(COLOR_PAIR(2));
 
     char c = '+';
 
@@ -33,7 +57,6 @@ int main(int argc, char ** argv) {
     getch();
 
     endwin();
-
 
     return 0;
 }
